@@ -696,7 +696,7 @@ body.mob #hero { position: absolute; inset: 30px 0 auto 0; height: 38vh; justify
 body.mob #hero { overflow: hidden; }
 body.mob #hero .line { font-size: min(10.5vw, 64px); }
 body.mob .win { max-width: 100vw; }
-body.mob #hero .sub { letter-spacing: .3em; font-size: 9.5px; line-height: 1.8; }
+body.mob #hero .sub { letter-spacing: .26em; font-size: 10.5px; line-height: 1.8; }
 body.mob #desktop { overflow-y: auto; padding: calc(38vh + 26px) 14px 170px; }
 body.mob #icons { position: static; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 6px; }
 body.mob .dicon { position: static; width: auto; }
@@ -718,7 +718,7 @@ body.mob .win.closing { animation: sheetdown .25s ease forwards; }
 body.mob .tbar { height: 50px; padding-top: 8px; }
 body.mob .lights, body.mob .wsub { display: none; }
 body.mob .wtitle { font-size: 15px; max-width: 62%; }
-body.mob .done { display: block; margin-left: auto; color: var(--accent); font-weight: 600; font-size: 15px; }
+body.mob .done { display: block; margin-left: auto; color: var(--accent); font-weight: 600; font-size: 15px; padding: 12px 14px; margin-top: -12px; margin-bottom: -12px; margin-right: -14px; }
 body.mob .finder { flex-direction: column; }
 body.mob .fside { width: auto; flex-direction: row; border-right: 0; border-bottom: .5px solid var(--hair-soft); overflow-x: auto; padding: 8px 10px; gap: 6px; flex-shrink: 0; }
 body.mob .fside h5 { display: none; }
@@ -731,6 +731,18 @@ body.mob .paper { padding: 22px 18px; }
 body.mob .paper .stats { grid-template-columns: repeat(2, 1fr); }
 body.mob .toastitem { width: auto; }
 body.mob #toast { left: 14px; }
+/* phone polish */
+body.mob #ticker { padding: 6px 0 5px; gap: 3px; }
+body.mob #ticker .lrow { height: 26px; }
+body.mob .menu { min-width: 0; width: 196px; max-width: calc(100vw - 16px); }
+body.mob #ticker .lg { margin: 0 18px; }
+body.mob .th-dots button { position: relative; }
+body.mob .th-dots button::after { content: ""; position: absolute; inset: -14px -6px; }
+@media (max-height: 760px) {
+  body.mob #hero { height: 31vh; }
+  body.mob #desktop { padding-top: calc(31vh + 16px); }
+}
+
 body.mob .qt .stage { flex: none; aspect-ratio: 16 / 10; }
 body.mob .tv { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
 body.mob .tvlist { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: .5px solid var(--hair-soft); padding: 8px 10px; gap: 8px; }
@@ -1433,7 +1445,7 @@ var APPS = {
   terminal: { icon: "🖥️", label: "Terminal", open: openTerminal },
   trash: { icon: "🗑️", label: "Trash", open: openTrash }
 };
-function launch(id) { var d = $('.ditem[data-app="' + id + '"]'); if (d) { d.classList.add("bounce"); setTimeout(function () { d.classList.remove("bounce"); }, 560); } APPS[id].open(); }
+function launch(id) { if (document.body.classList.contains("mob")) { var tt = document.querySelectorAll("#toast .toastitem"); for (var q = 0; q < tt.length; q++) tt[q].remove(); } var d = $('.ditem[data-app="' + id + '"]'); if (d) { d.classList.add("bounce"); setTimeout(function () { d.classList.remove("bounce"); }, 560); } APPS[id].open(); }
 
 function countUp(el, target, dur, suffix) {
   var t0 = performance.now(); suffix = suffix || "";
@@ -1631,7 +1643,7 @@ function buildMenubar() {
     var a = e.target.closest("[data-act]"); if (a) doAction(a.dataset.act);
   });
   $("#mb-snd").addEventListener("click", function () { setSounds(!SND); });
-  function tick() { var d = new Date(); $("#clock").textContent = d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) + "  " + d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }); }
+  function tick() { var d = new Date(); $("#clock").textContent = (document.body.classList.contains("mob") && innerWidth < 480 ? "" : d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) + "  ") + d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" }); }
   tick(); setInterval(tick, 15000);
 }
 function doAction(act) {
@@ -1701,8 +1713,8 @@ document.addEventListener("keydown", function (e) {
 function buildTicker() {
   var L = DATA.logos || [], mob = document.body.classList.contains("mob");
   L.forEach(function (row, ri) {
-    var A = mob ? 1150 : 1500, html = row.map(function (e) {
-      var h = Math.max(13, Math.min(mob ? 27 : 33, Math.sqrt(A / e.ar))), w = Math.round(h * e.ar);
+    var A = mob ? 950 : 1500, html = row.map(function (e) {
+      var h = Math.max(13, Math.min(mob ? 22 : 33, Math.sqrt(A / e.ar))), w = Math.round(h * e.ar);
       var cls = "lg m-" + e.mono + (e.dark ? " dk" : "");
       return '<span class="' + cls + '" title="' + esc(e.n) + '" style="width:' + w + 'px;height:' + Math.round(h) + 'px">' +
         '<img class="lw" alt="' + esc(e.n) + '" src="' + (e.sw || e.s) + '" draggable="false"><img class="lc" alt="" aria-hidden="true" src="' + e.s + '" draggable="false"></span>';

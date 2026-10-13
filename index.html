@@ -1103,11 +1103,11 @@ var YAAS_LONG = YAAS.filter(function (y) { return y[6] === "long"; }), YAAS_SHOR
 var LATEST = VIDS.filter(function (v) { return v.d && v.cat !== "music" && inWork(v); }).sort(byNew).slice(0, 10);
 var SECS = [
   { k: "series", n: "Web Series", sub: "Pick a show to see every episode", shows: "series" },
-  { k: "music", n: "Music", sub: "Original songs I've produced, streaming on Spotify", music: ["0GJv5liFEnCzaIcuLn6v1i", "1S6sofrEMPbiRqogFvXS1b", "0icX0pp9H07Ir40Vb8vaQs"] },
-  { k: "talk", n: "Talk Shows & Stand-up", sub: "Comedy talk shows and panel shows: Abish Mathew's Son Of Abish and Gursimran Khamba's The Nation Wants to Guess", shows: "talk" },
   { k: "long", n: "Long-form YouTube & Documentaries", sub: "Documentaries, explainers and stories, plus the long-form channels my AEOS / YAAS team delivers audio for", items: T_DOC, channels: YAAS_LONG, chTitle: "AEOS / YAAS long-form channels" },
+  { k: "talk", n: "Talk Shows & Stand-up", sub: "Comedy talk shows and panel shows: Abish Mathew's Son Of Abish and Gursimran Khamba's The Nation Wants to Guess", shows: "talk" },
   { k: "films", n: "Short Films", items: T_SHORTF },
   { k: "ads", n: "Ad Films", sub: "Commercials for Scaler, Motilal Oswal and myHQ", items: T_ADS },
+  { k: "music", n: "Music", sub: "Original songs I've produced, streaming on Spotify", music: ["0GJv5liFEnCzaIcuLn6v1i", "1S6sofrEMPbiRqogFvXS1b", "0icX0pp9H07Ir40Vb8vaQs"] },
   { k: "brand", n: "Brand & CSR Films", sub: "Impact films for LIC Housing Finance and Humans of Bombay × Siyaram's", items: T_CSR },
   { k: "sketch", n: "Sketches & Digital Originals", sub: "FilterCopy, Dice Media and Gobble sketches, specials and digital originals", items: T_SKETCH, filters: ["FilterCopy", "Dice Media", "Gobble"] },
   { k: "shortform", n: "Short-form Content", sub: "Instagram-first and short-form IPs my AEOS / YAAS sound team delivers audio for. Each card opens the channel", channels: YAAS_SHORT }

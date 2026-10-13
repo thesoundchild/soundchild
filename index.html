@@ -694,6 +694,11 @@ body.mob .rwrap.posters.wide .pc { width: 240px; }
 .cc.inrow .cstat { margin-top: auto; }
 .wgrid .cc.inrow { width: auto; }
 body.mob .cc.inrow { width: 224px; height: 210px; }
+
+/* music: Spotify embeds */
+.wk .mgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; padding: 16px 44px 20px; }
+.wk .mgrid iframe { display: block; width: 100%; height: 152px; border: 0; border-radius: 12px; background: rgba(255,255,255,.04); color-scheme: normal; }
+body.mob .wk .mgrid { grid-template-columns: 1fr; gap: 10px; padding: 14px 18px 18px; }
 /* ---------- phone layout: icon grid + bottom sheets ---------- */
 body.mob #hero { position: absolute; inset: 30px 0 auto 0; height: 38vh; justify-content: flex-end; padding-bottom: 8px; }
 body.mob #hero { overflow: hidden; }
@@ -1098,6 +1103,7 @@ var YAAS_LONG = YAAS.filter(function (y) { return y[6] === "long"; }), YAAS_SHOR
 var LATEST = VIDS.filter(function (v) { return v.d && v.cat !== "music" && inWork(v); }).sort(byNew).slice(0, 10);
 var SECS = [
   { k: "series", n: "Web Series", sub: "Pick a show to see every episode", shows: "series" },
+  { k: "music", n: "Music", sub: "Original songs I've produced, streaming on Spotify", music: ["0GJv5liFEnCzaIcuLn6v1i", "1S6sofrEMPbiRqogFvXS1b", "0icX0pp9H07Ir40Vb8vaQs"] },
   { k: "talk", n: "Talk Shows & Stand-up", sub: "Comedy talk shows and panel shows: Abish Mathew's Son Of Abish and Gursimran Khamba's The Nation Wants to Guess", shows: "talk" },
   { k: "long", n: "Long-form YouTube & Documentaries", sub: "Documentaries, explainers and stories, plus the long-form channels my AEOS / YAAS team delivers audio for", items: T_DOC, channels: YAAS_LONG, chTitle: "AEOS / YAAS long-form channels" },
   { k: "films", n: "Short Films", items: T_SHORTF },
@@ -1147,7 +1153,7 @@ var WSHOWS = WORK_SHOWS, TSHOWS = TALK_SHOWS, WVIDS = VIDS.filter(function (v) {
 var FEAT = ["grandreturn", "adulting-s3", "apu", "unbach", "little", "wtf-s4", "pfa-s2"].map(function (k) { return SHOWBY[k]; }).filter(function (s) { return s && showArt(s); });
 var ROWMAX = 20;
 var PLAYSVG = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.2v11.6L13.6 8z"/></svg>';
-var NAVN = { latest: "Latest", series: "Web Series", talk: "Talk Shows", long: "Long-form", shortform: "Short-form", films: "Short Films", ads: "Ad Films", brand: "Brand & CSR", sketch: "Sketches" };
+var NAVN = { latest: "Latest", series: "Web Series", music: "Music", talk: "Talk Shows", long: "Long-form", shortform: "Short-form", films: "Short Films", ads: "Ad Films", brand: "Brand & CSR", sketch: "Sketches" };
 function secItems(sec) { var it = sec.items || []; var f = WK.filt[sec.k] || "all"; if (sec.filters && f !== "all") it = it.filter(function (v) { return v.ch === f; }); return it; }
 function rowHTML(inner, cls) {
   var arr = function (d) { return '<button class="rarr ' + (d < 0 ? "l" : "r") + '" data-arr="' + d + '" tabindex="-1" aria-label="Scroll ' + (d < 0 ? "left" : "right") + '"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="' + (d < 0 ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5") + '" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'; };
@@ -1259,7 +1265,10 @@ function secHead(s, list, extra, more) {
 }
 function renderSec(c, k) {
   var s = SECBY[k], el = c.querySelector("#ws-" + k), h = "";
-  if (s.shows) {
+  if (s.music) {
+    h += secHead(s, [], s.music.length + " tracks");
+    h += '<div class="mgrid">' + s.music.map(function (id) { return '<iframe title="Spotify track" src="https://open.spotify.com/embed/track/' + id + '?utm_source=generator&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'; }).join("") + "</div>";
+  } else if (s.shows) {
     var list = s.shows === "talk" ? TSHOWS : WSHOWS, eps = s.shows === "talk" ? T_TALK : T_SERIES;
     h += secHead(s, eps, nShows(list) + " shows · " + eps.length + " episodes");
     h += rowHTML(list.map(showCard).join(""), "posters" + (s.shows === "talk" ? " wide" : ""));

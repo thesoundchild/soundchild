@@ -266,6 +266,10 @@ body.mob .cgrid2 { grid-template-columns: 1fr; }
 .mhead { font-size: 12.5px; color: var(--text-2); padding: 4px 6px 14px; line-height: 1.5; }
 .mrow { display: flex; align-items: center; gap: 12px; padding: 11px 10px; border-radius: 10px; color: var(--text); cursor: pointer; }
 .mrow:hover { background: rgba(255,255,255,.06); }
+.mailrow { cursor: default; } .mlink { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; color: var(--text); }
+.mailrow .sel { user-select: text; }
+.mcopy { font-size: 12.5px; font-weight: 600; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,.1); color: var(--text); flex: none; transition: background .2s, transform .1s ease-out; }
+.mcopy:hover { background: rgba(255,255,255,.18); } .mcopy:active { transform: scale(.95); }
 .mic { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; font-size: 17px; font-weight: 700; background: linear-gradient(140deg, #3a3d4a, #23252e); flex: none; }
 .mtxt b { font-size: 13px; font-weight: 600; display: block; }
 .mtxt span { font-size: 11.5px; color: var(--text-3); }
@@ -1471,12 +1475,18 @@ function openAbout() {
 /* ---- Contact (Mail) ---- */
 function openContact() {
   var c = document.createElement("div"); c.className = "mail";
-  c.innerHTML = '<div class="mhead">For projects, collaborations and roles in sound, music and audio post, LinkedIn is the fastest way to reach me.</div>' +
-    '<a class="mrow" href="https://www.linkedin.com/in/harshvardhan-singh-/" target="_blank" rel="noopener"><div class="mic" style="background:linear-gradient(140deg,#0a66c2,#2e8be6)">in</div><div class="mtxt"><b>linkedin.com/in/harshvardhan-singh-</b><span>LinkedIn profile</span></div><span class="chev">›</span></a>' +
-    '<a class="mrow" href="https://linktr.ee/thesoundchild" target="_blank" rel="noopener"><div class="mic" style="background:linear-gradient(140deg,#43e660,#1fb84a);color:#0b2a12">✳</div><div class="mtxt"><b>linktr.ee/thesoundchild</b><span>Every published link</span></div><span class="chev">›</span></a>' +
-    '<div class="mrow" id="cvrow" role="button" tabindex="0"><div class="mic">📄</div><div class="mtxt"><b>Curriculum Vitae</b><span>View the CV</span></div><span class="chev">›</span></div>';
-  c.querySelector("#cvrow").onclick = function () { launch("cv"); };
-  createWindow("contact", { title: "Contact", sub: "Mail", w: 480, h: 360, body: c });
+  var MAIL = "harshvardhan.wav@gmail.com";
+  c.innerHTML = '<div class="mhead">For projects, collaborations and roles in sound, music and audio post, write to me or find me here.</div>' +
+    '<div class="mrow mailrow"><a class="mlink" href="mailto:' + MAIL + '"><div class="mic" style="background:linear-gradient(140deg,#ff5a4e,#d13a2f)">✉</div><div class="mtxt"><b class="sel">' + MAIL + '</b><span>Email</span></div></a><button class="mcopy" aria-label="Copy email address">Copy</button></div>' +
+    '<a class="mrow" href="https://www.linkedin.com/in/harshvardhan-singh-/" target="_blank" rel="noopener"><div class="mic" style="background:linear-gradient(140deg,#0a66c2,#2e8be6)">in</div><div class="mtxt"><b>linkedin.com/in/harshvardhan-singh-</b><span>LinkedIn</span></div><span class="chev">↗</span></a>' +
+    '<a class="mrow" href="https://www.instagram.com/thesoundchild/" target="_blank" rel="noopener"><div class="mic" style="background:linear-gradient(45deg,#f9b233,#e1306c 55%,#833ab4)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg></div><div class="mtxt"><b>@thesoundchild</b><span>Instagram</span></div><span class="chev">↗</span></a>';
+  var btn = c.querySelector(".mcopy");
+  btn.onclick = function () {
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); };
+    try { navigator.clipboard.writeText(MAIL).then(done, function () { selectText(); }); } catch (e) { selectText(); }
+    function selectText() { var r = document.createRange(); r.selectNodeContents(c.querySelector(".sel")); var sl = getSelection(); sl.removeAllRanges(); sl.addRange(r); }
+  };
+  createWindow("contact", { title: "Contact", sub: "Mail", w: 480, h: 330, body: c });
 }
 
 /* ---- CV ---- */

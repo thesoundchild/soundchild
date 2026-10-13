@@ -227,6 +227,7 @@ a { color: var(--accent); text-decoration: none; }
 .notes p { margin-bottom: 12px; color: #dfe1e8; }
 .notes ul { margin: 0 0 14px 18px; color: #dfe1e8; }
 .notes li { margin-bottom: 8px; }
+.notes.about { font-size: 15px; line-height: 1.7; } .notes.about h3 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--signal); margin: 22px 0 8px; } .notes.about h3:first-of-type { margin-top: 6px; } .notes.about p { max-width: 62ch; }
 .notes .hl { background: rgba(255,214,10,.22); padding: 0 3px; border-radius: 3px; }
 
 /* mail */
@@ -1383,107 +1384,11 @@ function openCase(it) {
 
 /* ---- About (Notes) ---- */
 function openAbout() {
-  var c = document.createElement("div"); c.className = "notes";
-  c.innerHTML = '<h2>About me</h2><div class="date">Notes · Bengaluru</div>' +
-    "<p>I'm <b>Harshvardhan Singh</b>, Harsh to most people. I'm a sound designer, music producer and audio post-production supervisor, currently <span class=\"hl\">Head of Sound Design at AEOS / YAAS</span>.</p>" +
-    "<p>I got into sound because of how it shapes emotion, often without us noticing. Eight years in, that's still the point.</p><p>What's on this desktop:</p><ul>" +
-    "<li><b>Building teams:</b> twice the first sound hire, at Pocket Aces and then at YAAS. At YAAS I grew the team from 1 to 8 and we now run audio for 1,000+ videos a month across 50+ channels, about 1B+ views a month.</li>" +
-    "<li><b>Sound design & score:</b> OTT series for Dice Media, FilterCopy and Gobble, a short film that was an Official Selection at the Atlanta Indian Film Festival 2023, and brand films for LIC HFL, Humans of Bombay, Unacademy and Royal Enfield.</li>" +
-    "<li><b>Music:</b> singles I produced, composed, mixed and mastered. They're in the Music folder.</li>" +
-    "<li><b>Podcasts & games:</b> Zerodha's The Daily Brief (Top 10 on Spotify and Apple Podcasts), and audio direction for Unleash the Avatar and Headshot.</li>" +
-    "<li><b>AI audio:</b> voice cloning, AI avatars, AI scoring and restoration pipelines that cut turnaround and raised capacity.</li></ul>" +
-    "<p>Freelance credits include Abhish Mathew's Son of Abhish, Gursimran Khamba's The Nation Wants to Guess, Biswa Kalyan Rath, and the Mahindra BE 6e Batman Edition launch.</p>" +
-    '<p style="color:var(--text-3);font-size:12.5px">The CV on the desktop has the full picture. Tools: Logic Pro X, iZotope RX.</p>';
-  createWindow("about", { title: "About Me", sub: "Notes", w: 640, h: 590, body: c });
+  var c = document.createElement("div"); c.className = "notes about";
+  c.innerHTML = "<h2>About me</h2><div class=\"date\">Harshvardhan Singh · Bengaluru</div><h3>Where it started</h3><p>Rajasthani by roots, but born and brought up in Kerala. I grew up in a small but vibrant town called Thrissur, which, if you’ve ever been there, you’ll know isn’t just any place. It’s the cultural heart of Kerala.</p><p>Thrissur has this incredible energy, and nothing captures it better than Thrissur Pooram, easily one of the wildest and most beautiful festivals I’ve ever experienced. Massive elephants, fireworks, and this wall of sound from traditional percussion, the chenda melam, that hits you right in the chest. That festival, that sound, that vibe… I think that’s what really pulled me towards music, without me even realising it.</p><h3>Finding the music</h3><p>In school, I got into DJing, mostly just messing around at first, then throwing parties (don’t worry, they were sober… mostly 😅). I was that kid who’d spend hours finding the perfect drop or remix. Looking back, those parties were my first real lessons in reading a room and using music to control energy.</p><p>After school, while most people headed off to college, I went down a different path. I dove into music production and sound engineering, got certified in Logic Pro X by Apple, and moved out at 18 to work with Pocket Aces, the folks behind FilterCopy and Dice Media.</p><h3>Bombay</h3><p>Those early days in Bombay weren’t easy. No safety net, no family around, and I was definitely the youngest in the room most of the time. But I soaked it all in, learned fast, worked hard, and slowly found my voice (and my sound). I eventually started producing and designing sound for some of the biggest web series in the country. Honestly, that first job taught me more than any college course ever could.</p><h3>Off the clock</h3><p>Outside of work, I’m also a singer-songwriter with a few tracks out on all the DSPs. I mostly write what I feel, no filters. Music’s always been a way for me to process things and stay grounded.</p><p>Also, big petrolhead. I’m obsessed with cars and F1. Like, I can talk about tyre strategies and engine sounds for hours. And here’s a fun one: I mix a damn good cocktail (might’ve missed my calling as a bartender).</p><h3>The work</h3><p>I got into sound because I was obsessed with how it makes you feel things without you realising it. Eight years later, that obsession is still the thing that drives everything I do.</p><p>I’ve spent most of my career being the first sound person in the room. At Pocket Aces, I built the music and sound department from scratch for Dice Media, FilterCopy and Gobble. Then I did it again at AEOS / YAAS, where I went from being a team of one to running an 8-person sound team producing <b>1,000+ videos a month across 50+ channels</b> for brands like Zerodha, Coca-Cola and Nothing.</p><p>I don’t just design sound. I build the systems, hire the people, write the playbooks, and make sure the work holds up long after I’m not the one doing it.</p><p>My work spans OTT web series, YouTube, brand films, podcasts, infotainment, game audio, live events and AI-generated content. If it has audio, I’ve probably worked on it.</p><p>What I care about most is sound that serves the content. Not sound design for its own sake, but the kind that keeps a viewer watching, makes a brand feel distinct, or gives an IP a voice that nobody else has.</p><p>So yeah, that’s me. Part sound nerd, part storyteller, part speed junkie. Currently based in Bengaluru, always curious about the next thing worth building, and figuring it all out one beat at a time.</p>";
+  createWindow("about", { title: "About Me", sub: "Notes", w: 660, h: 640, body: c });
 }
 
-/* ---- Contact (Mail) ---- */
-function openContact() {
-  var c = document.createElement("div"); c.className = "mail";
-  c.innerHTML = '<div class="mhead">For projects, collaborations and roles in sound, music and audio post, LinkedIn is the fastest way to reach me.</div>' +
-    '<a class="mrow" href="https://www.linkedin.com/in/harshvardhan-singh-/" target="_blank" rel="noopener"><div class="mic" style="background:linear-gradient(140deg,#0a66c2,#2e8be6)">in</div><div class="mtxt"><b>linkedin.com/in/harshvardhan-singh-</b><span>LinkedIn profile</span></div><span class="chev">›</span></a>' +
-    '<a class="mrow" href="https://linktr.ee/thesoundchild" target="_blank" rel="noopener"><div class="mic" style="background:linear-gradient(140deg,#43e660,#1fb84a);color:#0b2a12">✳</div><div class="mtxt"><b>linktr.ee/thesoundchild</b><span>Every published link</span></div><span class="chev">›</span></a>' +
-    '<div class="mrow" id="cvrow" role="button" tabindex="0"><div class="mic">📄</div><div class="mtxt"><b>Curriculum Vitae</b><span>View the CV</span></div><span class="chev">›</span></div>';
-  c.querySelector("#cvrow").onclick = function () { launch("cv"); };
-  createWindow("contact", { title: "Contact", sub: "Mail", w: 480, h: 360, body: c });
-}
-
-/* ---- CV ---- */
-function openCV() {
-  var c = document.createElement("div"); c.className = "cvw";
-  c.innerHTML = '<div class="cvbar"><div><b>Harshvardhan Singh — CV</b><div>Head of Sound Design · 8+ years</div></div><a href="https://www.linkedin.com/in/harshvardhan-singh-/" target="_blank" rel="noopener">Open LinkedIn</a></div>' +
-  '<div class="paper"><h1>Harshvardhan Singh</h1><div class="role">Audio Post-Production Supervisor · Sound Designer · Music Producer · Bengaluru, India</div>' +
-  "<h2>Overview</h2><p>I was drawn to sound by its ability to shape emotion and influence how we experience a story, often without us consciously noticing it. Eight years into my career, that remains at the core of my work.</p>" +
-  "<p>I've spent much of my career building audio functions from the ground up, first at Pocket Aces and later at AEOS / YAAS, where I grew the sound team from <b>1 to 8</b> and led production of <b>1,000+</b> videos a month across <b>50+</b> channels.</p>" +
-  "<p>My work has spanned OTT, YouTube, brand films, podcasts, infotainment, game audio, live events, and AI-generated content, working with brands including Zerodha, Google India, OpenAI, Coca-Cola, and Nothing. I see team building and creative craft as deeply connected: hiring and mentoring the right people, developing scalable workflows, and creating systems that enable consistently high-quality work. Ultimately, I care about sound that serves the story: keeping audiences engaged, giving brands a distinctive identity, and creating a unique sonic voice for every IP.</p>" +
-  '<h2>Experience</h2><h3>AEOS / YAAS · Head of Sound Design <span>Aug 2024 – Present</span></h3><div class="sub">Bengaluru · Full-time</div>' +
-  '<div class="stats"><div><b>1 → 8</b><span>built and scaled team</span></div><div><b>1,000+</b><span>videos produced monthly</span></div><div><b>50+</b><span>channels managed</span></div><div><b>1B+</b><span>monthly views generated</span></div></div><ul>' +
-  "<li>Joined as the first sound designer and <b>built the function from the ground up</b>, hiring, training and scaling the team from <b>1 to 8</b>.</li>" +
-  "<li>Led end-to-end audio post-production across <b>1,000+ videos/month and 50+ channels</b>, spanning documentaries, microdramas, infotainment, advertising, music videos, podcasts and live events, with same-day delivery across formats, for brands like <b>Google India, OpenAI, Coca-Cola, Zerodha, Nothing, Hyrox, One8, RCB, Zepto, Bengaluru City Police</b> and many more.</li>" +
-  "<li>Led the development of sonic identities across in-house YAAS IPs, including <b>Varun Mayya, Aevy TV, Full Disclosure and Breakdown</b>, through sound design, music production and curation, with a focus on strengthening storytelling, audience engagement and viewer retention.</li>" +
-  "<li>Built and standardised <b>AI-driven audio workflows</b> across the team, using <b>ElevenLabs and HeyGen for voice cloning and AI voice production</b> (including <b>voice clones and AI avatars for clients like RCB and Bengaluru City Police</b>), <b>Suno for music and scoring, and Adobe Podcast and Audiophonic for audio restoration</b>; established scalable pipelines that reduced turnaround time and increased team capacity.</li>" +
-  "<li>Provided hands-on technical leadership across <b>location sound, audio restoration, sound design, music production, mixing, mastering and delivery</b>, while establishing asset management, ingest, backup and archive workflows for a growing multi-format content library.</li>" +
-  "<li>Owned the audio strategy for <b>Zerodha's The Daily Brief</b>, building a parallel video-editing and audio post-production workflow and dedicated night-shift team to deliver daily releases across <b>3 languages</b>, helping the podcast reach the <b>Top 10 on Spotify and Apple Podcasts</b>.</li>" +
-  "<li>Partnered with the Aeos Labs developer team as an <b>audio and music SME</b>, translating music theory, composition and vocal principles into technical requirements for an AI system designed to generate professional-grade instrumentals and vocals.</li>" +
-  "<li>Directed audio strategy across projects including <b>Unleash the Avatar</b>, one of India's first AAA games, and <b>Headshot</b>, shaping UX/UI sound to communicate product feedback and user interaction through audio.</li></ul>" +
-  '<div class="sub"><b>Educator &amp; Mentor — Aevy Video School &amp; GenC</b></div><ul>' +
-  "<li>Delivered masterclasses and lectures on sound design, helping creators understand sound as a core storytelling tool rather than a technical afterthought.</li>" +
-  "<li>Taught creators how sound design choices influence viewer engagement, retention and overall content quality.</li></ul>" +
-  '<div class="sub"><b>Beyond Core Role</b></div><ul>' +
-  "<li>Stepped in as Acting Head of Production, taking ownership of production operations during the HoD's absence.</li>" +
-  "<li>Led end-to-end pre-production, production, media coverage and post-production for the Peak State Festival, HYROX and One8 launch event, serving as Production Supervisor and Creative Director.</li></ul>" +
-  '<h3>Pocket Aces · Intern → Associate Sound Designer → Senior Sound Designer <span>Dec 2018 – Feb 2023</span></h3><div class="sub">Mumbai · Full-time · 4 yrs 3 mos</div><ul>' +
-  "<li>Joined as the first sound designer and built the music and sound department from the ground up, establishing workflows still in use today. Grew from intern to senior sound designer in <b>four years</b>.</li>" +
-  "<li>Managed music and sound for all D2C channels, owning end-to-end music production, composition, background scoring, sound design, on-location recording, noise reduction, audio restoration, foley, mixing, and mastering across Dice Media, FilterCopy, and Gobble.<br>Key projects: What The Folks S4, Little Things: Jab Dhruv Met Kavya S1, You Got Chef'd S2 &amp; S3, Please Find Attached S1 &amp; S2, Love Travel Repeat, Adulting S2 &amp; S3.</li>" +
-  "<li>Built and led a team of music producers and sound designers, replacing external vendors with a cost-efficient in-house production model.</li>" +
-  "<li>Handled artist scouting, studio booking, contracts and MOUs, and budgets across long-form and short-form content.</li></ul>" +
-  '<h3>Freelance · Sound Designer &amp; Music Producer <span>2018 – 2026</span></h3><p>Abhish Mathew\'s Son of Abhish (2026) · Gursimran Khamba\'s The Nation Wants to Guess (Season 1) · Biswa Kalyan Rath (Lumio &amp; Scaler ad) · Be YouNick · Mahindra BE 6e Batman Edition live launch event · Curefit / Cult Fit · LIC · Humans of Bombay · Unacademy · Royal Enfield · myHQ</p>' +
-  "<h2>Skills</h2><p><b>DAW:</b> Logic Pro X, iZotope RX<br><b>AI &amp; Tech:</b> ElevenLabs, Sarvam AI, Suno, HeyGen, Adobe Podcast, Audiophonic<br><b>Disciplines:</b> Sound Design, Music Production, Mixing &amp; Mastering, Audio Restoration, Foley, Re-record Mixing, Dubbing, Location Sound Recording, Acoustic Treatment</p>" +
-  "<h2>Education &amp; Certification</h2><p><b>Academy of Universal Music</b> · Diploma in Music Production &amp; Sound Engineering (<b>93.13%</b>), 2017 – 2018<br><b>Certified Professional in Logic Pro</b> · Apple, Jun 2018</p></div>";
-  createWindow("cv", { title: "Harshvardhan_Singh_CV.pdf", sub: "Preview", w: 840, h: 650, body: c });
-}
-
-/* ---- Terminal ---- */
-function openTerminal() {
-  var c = document.createElement("div"); c.className = "term";
-  c.innerHTML = '<div class="out">wavOS kernel 1.0 · 48 kHz / 24-bit. Type <span class="yel">help</span> to see what this thing can do.\n</div><div class="ln"><span class="ps">harsh@wavos ~ %&nbsp;</span><input autocomplete="off" spellcheck="false" aria-label="Terminal input"></div>';
-  createWindow("terminal", { title: "harsh@wavos — zsh", sub: "Terminal", w: 620, h: 410, body: c });
-  var out = c.querySelector(".out"), input = c.querySelector("input");
-  c.addEventListener("click", function () { input.focus(); });
-  function print(s) { out.innerHTML += s + "\n"; c.scrollTop = c.scrollHeight; }
-  var CMDS = {
-    help: function () { print('<span class="dim">commands:</span>\n  <span class="yel">whoami</span>      who is behind this OS\n  <span class="yel">stats</span>       headline numbers\n  <span class="yel">ls</span>          list the desktop\n  <span class="yel">open</span> &lt;app&gt;  work · insights · cases · about · cv · contact · trash\n  <span class="yel">play</span>        play a short phrase (sound on)\n  <span class="yel">loudness</span>    meter the last mix\n  <span class="yel">neofetch</span>    system info\n  <span class="yel">clear</span>       wipe the screen'); },
-    whoami: function () { print("Harshvardhan Singh. Head of Sound Design @ AEOS / YAAS, Bengaluru.\nFirst sound hire twice: Pocket Aces, then YAAS. Team built 1 → 8."); },
-    stats: function () { print('<span class="blu">' + fmt(TOTAL_VIEWS) + '</span> views on my credited videos (' + ASOF + ')\n<span class="blu">1B+</span> monthly views · <span class="blu">1,000+</span> videos a month · <span class="blu">50+</span> channels\n<span class="blu">Top 10</span> on Spotify & Apple Podcasts (The Daily Brief) · <span class="blu">8+</span> years in sound'); },
-    ls: function () { print("Work/   Insights.app\nCase Files/   About Me.txt   CV.pdf   Contact.app\n" + '<span class="dim">' + VIDS.length + " videos · " + nShows(SERIES_ALL) + " shows · " + fmt(TOTAL_VIEWS) + " views</span>"); },
-    play: function () { print(playPhrase() ? '<span class="dim">♪ Sa Re Ga Ma Pa Ma Ga Re Sa (Bhairavi), at a polite level</span>' : '<span class="red">no audio device found</span>'); },
-    loudness: function () { print('Integrated  <span class="blu">-14.1 LUFS</span>\nTrue peak   <span class="blu">-1.2 dBTP</span>\nLRA         <span class="blu">6.8 LU</span>\n<span class="dim">ready for YouTube. the client will still ask to make it louder.</span>'); },
-    neofetch: function () { print('<span class="red">  ▁▃▅▇▅▃▁  </span>harsh@wavos\n<span class="red"> ▂▄▆█▆▄▂▁  </span>-----------\n<span class="red">  ▁▃▅▇▅▃▁  </span>OS: wavOS 1.0 (portfolio build)\n<span class="red">           </span>Host: Harshvardhan Singh, AEOS / YAAS\n<span class="red">           </span>Uptime: 8+ years in sound\n<span class="red">           </span>DAW: Logic Pro X · iZotope RX\n<span class="red">           </span>Output: 1,000+ videos / month\n<span class="red">           </span>Theme: glass, graphite, headroom'); },
-    clear: function () { out.innerHTML = ""; },
-    sudo: function () { print('<span class="red">harsh is not in the sudoers file. This incident will be reported to the mix engineer.</span>'); },
-    exit: function () { closeWin("terminal"); }
-  };
-  input.addEventListener("keydown", function (e) {
-    if (e.key !== "Enter") return; var raw = input.value.trim(); input.value = "";
-    print('<span class="ps">harsh@wavos ~ % </span>' + esc(raw)); if (!raw) return;
-    var parts = raw.split(/\s+/), cmd = parts[0].toLowerCase(), arg = (parts[1] || "").toLowerCase();
-    if (cmd === "open" && APPS[arg]) { launch(arg); print("opening " + arg + "…"); }
-    else if (CMDS[cmd]) CMDS[cmd]();
-    else print("zsh: command not found: " + esc(cmd) + ' <span class="dim">(try help)</span>');
-  });
-  setTimeout(function () { input.focus(); }, 380);
-}
-
-/* ---- Trash ---- */
-function openTrash() {
-  var c = document.createElement("div"); c.style.padding = "18px";
-  c.innerHTML = '<div class="fhead"><h3>Trash</h3><p>Things every sound designer\'s drive quietly contains.</p></div><div class="fgrid" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr))">' +
-    [["🎵", "mix_FINAL_final_v7.wav"], ["📝", "client note: make it pop.txt"], ["🎛️", "bounce (12).aif"], ["🔊", "whoosh I used 400 times.wav"]].map(function (x) { return '<div class="fitem"><div class="thumb" style="background:rgba(255,255,255,.04)"><span class="bigicon">' + x[0] + "</span></div><b>" + esc(x[1]) + "</b></div>"; }).join("") +
-    '</div><p style="font-size:12px;color:var(--text-3);margin-top:14px">Items in the Trash are deleted after 30 days, or bounced into the next mix. Usually the second one.</p>';
-  createWindow("trash", { title: "Trash", sub: "4 items", w: 540, h: 380, body: c });
-}
-
-/* ---- About This Portfolio ---- */
 function openAboutOS() {
   var c = document.createElement("div"); c.style.cssText = "padding:28px;text-align:center";
   c.innerHTML = '<div style="font-size:52px;margin-bottom:10px">🎚️</div><h3 style="font-size:19px;font-weight:700">wavOS <span style="color:var(--text-3);font-weight:400">1.0</span></h3>' +

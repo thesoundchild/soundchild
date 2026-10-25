@@ -1365,7 +1365,7 @@ function openInsights() {
   c.innerHTML = '<div class="num">0</div><p class="lead">Views across everything I\'ve worked on so far: web series, sketches, documentaries, talk shows, ads and brand films. Counted on YouTube, ' + ASOF + '.</p>' +
     '<div class="kpis">' + KPIS.map(function (k) { return '<div class="kpi"><b>' + k[0] + "</b><span>" + k[1] + "</span></div>"; }).join("") + "</div>" +
     '<div class="h4">Tools I use</div><div class="tools">' + TOOLS.map(function (t) { return '<div class="tool"><i class="ti ti-' + t[0] + '">' + TOOL_ICON[t[0]] + '</i><b>' + esc(t[1]) + "</b><span>" + esc(t[2]) + "</span>" + (t[0] === "logic" && DATA.applecert ? '<img class="tcert" src="' + DATA.applecert + '" alt="Apple Certified Pro, Logic Pro X">' : "") + "</div>"; }).join("") + "</div>" +
-    CLIENT_GROUPS.map(function (g) { return '<div class="h4">' + esc(g[0]) + '</div><div class="clients">' + g[1].map(function (x) { return "<span>" + esc(x) + "</span>"; }).join("") + "</div>"; }).join("");
+    "";
   createWindow("insights", { title: "Insights", sub: "views as of " + ASOF, w: 840, h: 650, body: c });
   countUp(c.querySelector(".num"), TOTAL_VIEWS, 1600, "");
 }

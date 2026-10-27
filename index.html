@@ -106,6 +106,13 @@ a { color: var(--accent); text-decoration: none; }
 .dicon.sel span { background: var(--accent); }
 .widget { position: absolute; border-radius: 18px; background: var(--glass); backdrop-filter: blur(30px) saturate(1.5); -webkit-backdrop-filter: blur(30px) saturate(1.5); border: .5px solid var(--hair); box-shadow: 0 14px 40px rgba(0,0,0,.35); padding: 16px 18px; overflow: hidden; }
 .widget h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .8px; color: var(--text-2); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+#w-music { width: 320px; right: 26px; top: 20px; padding: 12px 12px 12px; cursor: default; }
+#w-music h4 { justify-content: space-between; margin: 2px 4px 10px; }
+#w-music .wm-nav { display: flex; align-items: center; gap: 4px; text-transform: none; letter-spacing: 0; }
+#w-music .wm-nav i { font-style: normal; font-variant-numeric: tabular-nums; color: var(--text-3); min-width: 34px; text-align: center; }
+#w-music .wm-nav button { width: 24px; height: 24px; border-radius: 7px; color: var(--text); font-size: 17px; line-height: 1; background: rgba(255,255,255,.08); transition: background .2s; }
+#w-music .wm-nav button:hover { background: rgba(255,255,255,.16); }
+#w-music iframe { display: block; width: 100%; height: 80px; border: 0; border-radius: 12px; background: rgba(255,255,255,.04); }
 #w-stats { width: 262px; right: 26px; top: 20px; cursor: default; }
 #w-stats .big { font-size: 29px; font-weight: 800; letter-spacing: -1px; color: #fff; font-variant-numeric: tabular-nums; }
 #w-stats .cap { font-size: 12px; color: var(--text-2); margin: 2px 0 12px; }
@@ -712,6 +719,7 @@ body.mob .dicon .g { font-size: 30px; width: 62px; height: 62px; display: grid; 
 body.mob .dicon span { font-size: 11px; text-shadow: none; }
 body.mob .dicon.sel { background: none; border-color: transparent; }
 body.mob .dicon.sel span { background: none; }
+body.mob #w-music { display: none; }
 body.mob #w-stats { position: relative; right: auto; top: auto; width: auto; margin-top: 26px; }
 body.mob #ticker { bottom: 86px; }
 body.mob .ditem.m-hide, body.mob .dsep { display: none; }
@@ -900,6 +908,7 @@ body { background: #0b0b0c; }
 
 <div id="desktop">
   <div id="icons"></div>
+  <div class="widget" id="w-music" aria-label="My music on Spotify"><h4><span>🎧 My music</span><span class="wm-nav"><button data-d="-1" aria-label="Previous track">‹</button><i id="wm-i">1 / 3</i><button data-d="1" aria-label="Next track">›</button></span></h4><iframe id="wm-f" title="Spotify player" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></div>
 </div>
 </div>
 <div id="ticker" aria-label="Brands and studios I have worked with"><div class="lrow" id="lrow0"><div class="track"></div></div><div class="lrow r2" id="lrow1"><div class="track"></div></div></div>
@@ -1584,6 +1593,15 @@ function openAboutOS() {
 
 /* ================= DESKTOP ================= */
 var DESK = [["work", "📁", "Work"], ["insights", "📊", "Insights"], ["cases", "🗂️", "Case Files"], ["about", "📝", "About Me.txt"], ["cv", "📄", "CV.pdf"], ["contact", "✉️", "Contact"]];
+function buildMusicWidget() {
+  var w = $("#w-music"); if (!w) return;
+  var s = SECS.filter(function (x) { return x.music; })[0], ids = s ? s.music : [];
+  if (!ids.length) { w.remove(); return; }
+  var i = 0, f = $("#wm-f");
+  function show() { f.src = "https://open.spotify.com/embed/track/" + ids[i] + "?utm_source=generator&theme=0"; $("#wm-i").textContent = (i + 1) + " / " + ids.length; }
+  [].forEach.call(w.querySelectorAll(".wm-nav button"), function (b) { b.addEventListener("click", function () { i = (i + +b.dataset.d + ids.length) % ids.length; show(); }); });
+  show();
+}
 function buildDesktop() {
   var area = $("#icons");
   DESK.forEach(function (d, i) {
@@ -1734,6 +1752,7 @@ function stagger() {
   $("#menubar").classList.add("enter"); $("#hero").classList.add("hw-in");
   $$(".dicon").forEach(function (el, i) { el.classList.add("enter"); el.style.animationDelay = (.12 + i * .06) + "s"; });
   var d = $("#dockw"); d.classList.add("enter"); d.style.animationDelay = ".25s";
+  var wm = $("#w-music"); if (wm) { wm.classList.add("enter"); wm.style.animationDelay = ".45s"; }
   var t = $("#ticker"); t.classList.add("enter"); t.style.animationDelay = ".55s";
 }
 // probe: can this host load YouTube thumbnails? if so, show real artwork and play videos in place
@@ -1742,7 +1761,7 @@ function stagger() {
 var WAS_MOBILE = isMobile();
 function init() {
   document.body.classList.add("wp-0"); document.body.classList.toggle("mob", WAS_MOBILE);
-  buildDesktop(); buildDock(); buildMenubar(); buildCtx(); buildSpot(); buildTicker(); buildAmbient(); stagger();
+  buildDesktop(); buildDock(); buildMenubar(); buildCtx(); buildSpot(); buildTicker(); buildMusicWidget(); buildAmbient(); stagger();
   setTimeout(function () { toast("Welcome to wavOS", WAS_MOBILE ? "Tap an icon to explore. Swipe a sheet down to close it." : "Double-click any icon. Drag the windows. Right-click the desktop. Turn on sound up top."); }, 1400);
   var rto; addEventListener("resize", function () { clearTimeout(rto); rto = setTimeout(function () { if (isMobile() !== WAS_MOBILE) location.reload(); }, 350); });
 }
